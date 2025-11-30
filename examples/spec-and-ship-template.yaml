@@ -1,0 +1,55 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: spec-and-ship-template
+  title: Ship Specification
+  description: Create a new component from a generated specification.
+  tags:
+    - recommended
+    - spec-and-ship
+spec:
+  owner: user:guest
+  type: service
+
+  parameters:
+    - title: Component Details
+      required:
+        - name
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Unique name of the component
+          ui:autofocus: true
+          ui:options:
+            rows: 5
+    - title: Specification
+      required:
+        - content
+      properties:
+        content:
+          title: Specification Content
+          type: string
+          description: The generated specification content
+          ui:widget: textarea
+          ui:options:
+            rows: 10
+
+  steps:
+    - id: write-spec
+      name: Write Specification File
+      action: spec-and-ship:write-file
+      input:
+        path: spec.yaml
+        content: ${{ parameters.content }}
+
+    - id: log-message
+      name: Log Success
+      action: debug:log
+      input:
+        message: "Successfully shipped spec for ${{ parameters.name }}!"
+
+  output:
+    links:
+      - title: View Specification
+        url: ${{ steps['write-spec'].output.path }}
