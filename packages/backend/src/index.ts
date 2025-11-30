@@ -63,4 +63,6 @@ backend.add(import('@backstage/plugin-kubernetes-backend'));
 backend.add(import('@backstage/plugin-notifications-backend'));
 backend.add(import('@backstage/plugin-signals-backend'));
 
+backend.add(import('@internal/backstage-plugin-spec-and-ship-backend'));
+backend.add(import('./modules/scaffolder/specAndShipActions'));
 backend.start();
