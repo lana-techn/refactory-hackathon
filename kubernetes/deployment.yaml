@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spec-and-ship
+  namespace: default
+  labels:
+    app: spec-and-ship
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spec-and-ship
+  template:
+    metadata:
+      labels:
+        app: spec-and-ship
+    spec:
+      containers:
+        - name: backstage
+          image: spec-and-ship-backend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 7007
+              name: backend
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: GEMINI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: spec-and-ship-secrets
+                  key: GEMINI_API_KEY
+            # Add other necessary env vars like POSTGRES_USER, etc. if using a real DB
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi
