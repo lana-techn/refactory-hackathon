@@ -1,30 +1,17 @@
 import { createBackendModule } from '@backstage/backend-plugin-api';
-import { scaffolderActionsExtensionPoint } from '@backstage/plugin-scaffolder-node/alpha';
-import { createTemplateAction } from '@backstage/plugin-scaffolder-node';
-import fs from 'fs-extra';
-import path from 'path';
+import { scaffolderActionsExtensionPoint, createTemplateAction } from '@backstage/plugin-scaffolder-node';
+import { promises as fs } from 'fs';
+import * as path from 'path';
 
 const createWriteFileAction = () => {
-    return createTemplateAction<{ path: string; content: string }>({
+    return createTemplateAction({
         id: 'spec-and-ship:write-file',
         description: 'Writes a file to the workspace',
         schema: {
-            input: {
-                type: 'object',
-                required: ['path', 'content'],
-                properties: {
-                    path: {
-                        title: 'Path',
-                        description: 'Relative path to the file',
-                        type: 'string',
-                    },
-                    content: {
-                        title: 'Content',
-                        description: 'Content of the file',
-                        type: 'string',
-                    },
-                },
-            },
+            input: (z) => z.object({
+                path: z.string().describe('Relative path to the file'),
+                content: z.string().describe('Content of the file'),
+            }),
         },
         async handler(ctx) {
             const { path: filePath, content } = ctx.input;
@@ -35,13 +22,15 @@ const createWriteFileAction = () => {
                 throw new Error('File path must be within the workspace');
             }
 
-            await fs.outputFile(targetPath, content);
+            // Ensure directory exists
+            await fs.mkdir(path.dirname(targetPath), { recursive: true });
+            await fs.writeFile(targetPath, content, 'utf-8');
             ctx.logger.info(`File created at ${targetPath}`);
         },
     });
 };
 
-export default createBackendModule({
+export const specAndShipActionsModule = createBackendModule({
     pluginId: 'scaffolder',
     moduleId: 'spec-and-ship-actions',
     register(env) {
@@ -50,8 +39,11 @@ export default createBackendModule({
                 scaffolder: scaffolderActionsExtensionPoint,
             },
             async init({ scaffolder }) {
-                scaffolder.addActions(createWriteFileAction());
+                const writeFileAction = createWriteFileAction();
+                scaffolder.addActions(writeFileAction);
             },
         });
     },
 });
+
+export default specAndShipActionsModule;
