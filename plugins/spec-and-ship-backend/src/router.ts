@@ -19,6 +19,11 @@ export async function createRouter({
     prompt: z.string(),
   });
 
+  const refineSchema = z.object({
+    currentSpec: z.string(),
+    refinementPrompt: z.string(),
+  });
+
   router.post('/generate', async (req, res) => {
     const parsed = generateSchema.safeParse(req.body);
     if (!parsed.success) {
@@ -27,6 +32,18 @@ export async function createRouter({
 
     const { prompt } = parsed.data;
     const result = await aiService.generate(prompt);
+
+    res.json({ result });
+  });
+
+  router.post('/refine', async (req, res) => {
+    const parsed = refineSchema.safeParse(req.body);
+    if (!parsed.success) {
+      throw new InputError(parsed.error.toString());
+    }
+
+    const { currentSpec, refinementPrompt } = parsed.data;
+    const result = await aiService.refine(currentSpec, refinementPrompt);
 
     res.json({ result });
   });
