@@ -1,0 +1,11 @@
+app:
+  # Should be the same as backend.baseUrl, but for the frontend
+  baseUrl: http://localhost:7007
+
+backend:
+  baseUrl: http://localhost:7007
+  listen:
+    port: 7007
+    host: 0.0.0.0 # Listen on all interfaces in the container
+  cors:
+    origin: http://localhost:7007
