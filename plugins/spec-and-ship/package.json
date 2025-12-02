@@ -25,14 +25,18 @@
     "postpack": "backstage-cli package postpack"
   },
   "dependencies": {
+    "@apidevtools/swagger-parser": "^12.1.0",
     "@backstage/core-components": "^0.18.3",
     "@backstage/core-plugin-api": "^1.12.0",
     "@backstage/theme": "^0.7.0",
     "@material-ui/core": "^4.9.13",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.61",
+    "js-yaml": "^4.1.1",
     "jspdf": "^3.0.4",
-    "react-use": "^17.2.4"
+    "openapi-types": "^12.1.3",
+    "react-use": "^17.2.4",
+    "swagger-ui-react": "^5.30.3"
   },
   "peerDependencies": {
     "react": "^16.13.1 || ^17.0.0 || ^18.0.0"
@@ -45,6 +49,8 @@
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.0.0",
+    "@types/js-yaml": "^4",
+    "@types/swagger-ui-react": "^5",
     "msw": "^1.0.0",
     "react": "^16.13.1 || ^17.0.0 || ^18.0.0"
   },

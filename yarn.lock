@@ -30,6 +30,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@apidevtools/json-schema-ref-parser@npm:14.0.1":
+  version: 14.0.1
+  resolution: "@apidevtools/json-schema-ref-parser@npm:14.0.1"
+  dependencies:
+    "@types/json-schema": "npm:^7.0.15"
+    js-yaml: "npm:^4.1.0"
+  checksum: 10c0/f8aff4d32f66b81be0e641da175d359ec3e4191f9c65343b30f90cfbcfdbdb78b13e57c4a0a8d0574c828294abde56400a031858f61cf38b3309a4213698dc0c
+  languageName: node
+  linkType: hard
+
 "@apidevtools/json-schema-ref-parser@npm:^14.0.3":
   version: 14.2.1
   resolution: "@apidevtools/json-schema-ref-parser@npm:14.2.1"
@@ -69,6 +79,22 @@ __metadata:
   peerDependencies:
     openapi-types: ">=7"
   checksum: 10c0/21be668c64311d54579ef06e71b6d5640df032f4cdd959dfde93210f26128cbe3c84eb29ead1895c93af703cd4f2fd7efae31dd316549f1f9d29293c78b0ccd4
+  languageName: node
+  linkType: hard
+
+"@apidevtools/swagger-parser@npm:^12.1.0":
+  version: 12.1.0
+  resolution: "@apidevtools/swagger-parser@npm:12.1.0"
+  dependencies:
+    "@apidevtools/json-schema-ref-parser": "npm:14.0.1"
+    "@apidevtools/openapi-schemas": "npm:^2.1.0"
+    "@apidevtools/swagger-methods": "npm:^3.0.2"
+    ajv: "npm:^8.17.1"
+    ajv-draft-04: "npm:^1.0.0"
+    call-me-maybe: "npm:^1.0.2"
+  peerDependencies:
+    openapi-types: ">=7"
+  checksum: 10c0/ccac54e2f67c24c22fbfe8040a70642da20b72c8b0b21ba75c4e97b7444189eff09fb25fcdd8903f1081b9d4d3c78b57ed39c19397502e1bc64b517f0f3a8639
   languageName: node
   linkType: hard
 
@@ -5772,6 +5798,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@internal/backstage-plugin-spec-and-ship@workspace:plugins/spec-and-ship"
   dependencies:
+    "@apidevtools/swagger-parser": "npm:^12.1.0"
     "@backstage/cli": "npm:^0.34.5"
     "@backstage/core-app-api": "npm:^1.19.2"
     "@backstage/core-components": "npm:^0.18.3"
@@ -5785,10 +5812,15 @@ __metadata:
     "@testing-library/jest-dom": "npm:^6.0.0"
     "@testing-library/react": "npm:^14.0.0"
     "@testing-library/user-event": "npm:^14.0.0"
+    "@types/js-yaml": "npm:^4"
+    "@types/swagger-ui-react": "npm:^5"
+    js-yaml: "npm:^4.1.1"
     jspdf: "npm:^3.0.4"
     msw: "npm:^1.0.0"
+    openapi-types: "npm:^12.1.3"
     react: "npm:^16.13.1 || ^17.0.0 || ^18.0.0"
     react-use: "npm:^17.2.4"
+    swagger-ui-react: "npm:^5.30.3"
   peerDependencies:
     react: ^16.13.1 || ^17.0.0 || ^18.0.0
   languageName: unknown
@@ -13182,7 +13214,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/js-yaml@npm:^4.0.1":
+"@types/js-yaml@npm:^4, @types/js-yaml@npm:^4.0.1":
   version: 4.0.9
   resolution: "@types/js-yaml@npm:4.0.9"
   checksum: 10c0/24de857aa8d61526bbfbbaa383aa538283ad17363fcd5bb5148e2c7f604547db36646440e739d78241ed008702a8920665d1add5618687b6743858fae00da211
@@ -13630,6 +13662,15 @@ __metadata:
   dependencies:
     "@types/superagent": "npm:*"
   checksum: 10c0/e1b4a4d788c19cd92a3f2e6d0979fb0f679c49aefae2011895a4d9c35aa960d43463aca8783a0b3382bbf0b4eb7ceaf8752d7dc80b8f5a9644fa14e1b1bdbc90
+  languageName: node
+  linkType: hard
+
+"@types/swagger-ui-react@npm:^5":
+  version: 5.18.0
+  resolution: "@types/swagger-ui-react@npm:5.18.0"
+  dependencies:
+    "@types/react": "npm:*"
+  checksum: 10c0/948cdd763e7f247a5a620ccef109b2f3baa967e44ec0e02e11492543bcd39793b65dfa5399600d6e7233ffd21917cab403d63c6d614109b83e11017384b8a023
   languageName: node
   linkType: hard
 
@@ -15082,6 +15123,7 @@ __metadata:
   resolution: "backend@workspace:packages/backend"
   dependencies:
     "@backstage/backend-defaults": "npm:^0.13.1"
+    "@backstage/backend-plugin-api": "npm:^1.5.0"
     "@backstage/cli": "npm:^0.34.5"
     "@backstage/config": "npm:^1.3.6"
     "@backstage/plugin-app-backend": "npm:^0.5.8"
@@ -22872,7 +22914,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:=4.1.1, js-yaml@npm:^4.0.0, js-yaml@npm:^4.1.0":
+"js-yaml@npm:=4.1.1, js-yaml@npm:^4.0.0, js-yaml@npm:^4.1.0, js-yaml@npm:^4.1.1":
   version: 4.1.1
   resolution: "js-yaml@npm:4.1.1"
   dependencies:
@@ -26182,6 +26224,13 @@ __metadata:
   dependencies:
     apg-lite: "npm:^1.0.4"
   checksum: 10c0/8018822c2932d675457f3d1ad632d308e1d5c3becbda9eed27518a9e0117a792e320354f4b5ccbc4db89980899e82f0de420e36ecf71ba5d47d5b5c51e703ac0
+  languageName: node
+  linkType: hard
+
+"openapi-types@npm:^12.1.3":
+  version: 12.1.3
+  resolution: "openapi-types@npm:12.1.3"
+  checksum: 10c0/4ad4eb91ea834c237edfa6ab31394e87e00c888fc2918009763389c00d02342345195d6f302d61c3fd807f17723cd48df29b47b538b68375b3827b3758cd520f
   languageName: node
   linkType: hard
 
@@ -31054,7 +31103,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"swagger-ui-react@npm:^5.27.1":
+"swagger-ui-react@npm:^5.27.1, swagger-ui-react@npm:^5.30.3":
   version: 5.30.3
   resolution: "swagger-ui-react@npm:5.30.3"
   dependencies:
